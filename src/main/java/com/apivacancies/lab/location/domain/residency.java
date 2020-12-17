@@ -1,33 +1,26 @@
 package com.apivacancies.lab.location.domain;
 
+import com.apivacancies.lab.Gps;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class apartment {
-
-    // TODO : add setter and getter
-
-    public Long getId() {
-        return id;
-    }
+public class residency {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String type;
+    private String country;
 
-    private Long bedding;
+    private String region;
 
-    private Long surface;
+    private String address;
 
-    private Boolean babyEquipment;
-
-    private Float price;
-
-    private Long residency_id;
+    // TODO : check a good method for the Gps implementation
+    // private Gps position;
 
 }
