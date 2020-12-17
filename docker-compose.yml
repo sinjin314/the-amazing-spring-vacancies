@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  db:
+    image: library/mysql:latest
+    ports:
+      - "3306:3306"
+    restart: always
+    volumes:
+      - mysql-data:/vat/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: amazing-rest-api
+
+volumes:
+  mysql-data:
