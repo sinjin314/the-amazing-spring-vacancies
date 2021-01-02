@@ -1,15 +1,20 @@
+/*
+ * Copyright (c) 2021.
+ * Abdelhadi Hasnaoui <abdelhadi.hasnaoui@protonmail.com>
+ * sinjin.tech
+ */
+
 package com.apivacancies.lab.location.domain;
+
+import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 
 @Entity
 public class Apartment {
 
-    public Long getId() {
-        return id;
-    }
-
     @Id
+    @NotNull
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -22,6 +27,10 @@ public class Apartment {
     private Boolean babyEquipment;
 
     private Float price;
+
+    public Long getId() {
+        return id;
+    }
 
     public String getType() {
         return type;
