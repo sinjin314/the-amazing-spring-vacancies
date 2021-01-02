@@ -91,4 +91,28 @@ public class Residency {
         this.locType = locType;
     }
 
+    public Boolean getSpa() {
+        return spa;
+    }
+
+    public void setSpa(Boolean spa) {
+        this.spa = spa;
+    }
+
+    public Boolean getPool() {
+        return pool;
+    }
+
+    public void setPool(Boolean pool) {
+        this.pool = pool;
+    }
+
+    public Boolean getNursery() {
+        return nursery;
+    }
+
+    public void setNursery(Boolean nursery) {
+        this.nursery = nursery;
+    }
+
 }
