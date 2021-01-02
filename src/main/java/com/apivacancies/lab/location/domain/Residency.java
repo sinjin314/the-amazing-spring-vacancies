@@ -45,8 +45,6 @@ public class Residency {
     @Enumerated(EnumType.STRING)
     private LocationType locType;
 
-
-
     public Long getId() {
         return id;
     }
