@@ -21,6 +21,12 @@ public class Residency {
 
     private String address;
 
+    private Boolean spa;
+
+    private Boolean pool;
+
+    private Boolean nursery;
+
     public enum LocationType implements Serializable {
         MOUNTAIN,
         OCEAN,
@@ -38,6 +44,8 @@ public class Residency {
 
     @Enumerated(EnumType.STRING)
     private LocationType locType;
+
+
 
     public Long getId() {
         return id;
