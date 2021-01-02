@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2021.
+ * Abdelhadi Hasnaoui <abdelhadi.hasnaoui@protonmail.com>
+ * sinjin.tech
+ */
+
 package com.apivacancies.lab.location.controller;
 
 import org.springframework.http.HttpStatus;
