@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2021.
+ * Abdelhadi Hasnaoui <abdelhadi.hasnaoui@protonmail.com>
+ * sinjin.tech
+ */
+
 package com.apivacancies.lab.location.domain;
 
 import javax.persistence.*;
@@ -14,6 +20,12 @@ public class Residency {
     private String region;
 
     private String address;
+
+    private Boolean spa;
+
+    private Boolean pool;
+
+    private Boolean nursery;
 
     public enum LocationType implements Serializable {
         MOUNTAIN,
@@ -75,6 +87,30 @@ public class Residency {
 
     public void setLocType(LocationType locType) {
         this.locType = locType;
+    }
+
+    public Boolean getSpa() {
+        return spa;
+    }
+
+    public void setSpa(Boolean spa) {
+        this.spa = spa;
+    }
+
+    public Boolean getPool() {
+        return pool;
+    }
+
+    public void setPool(Boolean pool) {
+        this.pool = pool;
+    }
+
+    public Boolean getNursery() {
+        return nursery;
+    }
+
+    public void setNursery(Boolean nursery) {
+        this.nursery = nursery;
     }
 
 }
