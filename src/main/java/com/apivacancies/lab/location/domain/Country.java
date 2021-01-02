@@ -6,26 +6,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class apartment {
-
-    public Long getId() {
-        return id;
-    }
+public class Country {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String type;
+    private String name;
 
-    private Long bedding;
+    public Long getId() {
+        return id;
+    }
 
-    private Long surface;
+    public String getName() {
+        return name;
+    }
 
-    private Boolean babyEquipment;
-
-    private Float price;
-
-    private Long residency_id;
-
+    public void setName(String name) {
+        this.name = name;
+    }
 }

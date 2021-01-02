@@ -6,10 +6,7 @@ services:
     ports:
       - "3306:3306"
     restart: always
-    volumes:
-      - mysql-data:/vat/lib/mysql
     environment:
+      MYSQL_DATABASE: amazing-spring
       MYSQL_ROOT_PASSWORD: amazing-rest-api
 
-volumes:
-  mysql-data:
