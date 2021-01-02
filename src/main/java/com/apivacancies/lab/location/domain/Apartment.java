@@ -1,9 +1,6 @@
 package com.apivacancies.lab.location.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Apartment {
@@ -25,8 +22,6 @@ public class Apartment {
     private Boolean babyEquipment;
 
     private Float price;
-
-    private Long residency_id;
 
     public String getType() {
         return type;
@@ -68,11 +63,11 @@ public class Apartment {
         this.price = price;
     }
 
-    public Long getResidency_id() {
-        return residency_id;
-    }
-
-    public void setResidency_id(Long residency_id) {
-        this.residency_id = residency_id;
-    }
+//    public Long getResidency_id() {
+//        return residency_id;
+//    }
+//
+//    public void setResidency_id(Long residency_id) {
+//        this.residency_id = residency_id;
+//    }
 }
