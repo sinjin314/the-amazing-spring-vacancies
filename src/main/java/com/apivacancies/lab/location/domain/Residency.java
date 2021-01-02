@@ -24,8 +24,6 @@ public class Residency {
         COUNTRY
     }
 
-    // @Column( columnDefinition = "enum('MOUNTAIN', 'OCEAN', 'SEA', 'CITY', 'COUNTRY)")
     @Enumerated(EnumType.STRING)
     private LocationType locType;
-
 }

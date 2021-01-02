@@ -8,8 +8,6 @@ import javax.persistence.Id;
 @Entity
 public class Apartment {
 
-    // TODO : add setter and getter
-
     public Long getId() {
         return id;
     }
