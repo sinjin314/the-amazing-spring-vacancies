@@ -9,4 +9,3 @@ services:
     environment:
       MYSQL_DATABASE: amazing-spring
       MYSQL_ROOT_PASSWORD: amazing-rest-api
-
