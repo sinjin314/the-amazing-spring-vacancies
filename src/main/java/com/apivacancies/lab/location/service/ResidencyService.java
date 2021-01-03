@@ -14,7 +14,6 @@ import com.apivacancies.lab.location.domain.Residency;
 import com.apivacancies.lab.location.repository.ApartmentRepository;
 import com.apivacancies.lab.location.repository.CountryRepository;
 import com.apivacancies.lab.location.repository.ResidencyRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -146,4 +145,8 @@ public class ResidencyService {
         }
     }
 
+    public List<Residency> findResidencyByCountry(String country_name) {
+        Long country_id = countryRepository.findCountryByName(country_name);
+        return residencyRepository.findResidencyByCountryId(country_id);
+    }
 }

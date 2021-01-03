@@ -65,4 +65,10 @@ public class ResidencyController {
     public void deleteResidency(@PathVariable Long id) {
         residencyService.deleteResidency(id);
     }
+
+    @GetMapping("/residency/country/{country}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Residency> getResidencyByCountry(@PathVariable String country_name) {
+        return residencyService.findResidencyByCountry(country_name);
+    }
 }
