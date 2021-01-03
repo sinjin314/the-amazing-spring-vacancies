@@ -18,4 +18,13 @@ public interface ResidencyRepository extends JpaRepository<Residency, Long> {
 
     @Query(value = "select r FROM Residency r where r.country = :id")
     List<Residency> findResidencyByCountryId(Long id);
+
+    @Query(value = "SELECT r FROM Residency r WHERE r.region = :region")
+    List<Residency> findResidencyByRegion(String region);
+
+    @Query(value = "SELECT r FROM Residency r WHERE r.pool = true")
+    List<Residency> findResidencyWithPool();
+
+    @Query(value = "SELECT r FROM Residency r WHERE r.locType = 'MOUNTAIN'")
+    List<Residency> findResidencyAtMountain();
 }

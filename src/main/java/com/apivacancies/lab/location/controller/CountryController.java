@@ -8,7 +8,6 @@ package com.apivacancies.lab.location.controller;
 
 import com.apivacancies.lab.location.domain.Country;
 import com.apivacancies.lab.location.service.CountryService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -73,8 +72,7 @@ public class CountryController {
 
     @DeleteMapping("/country/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteCountry(@PathVariable Long id)
-    {
+    public void deleteCountry(@PathVariable Long id) {
         countryService.deleteCountry(id);
     }
 }
