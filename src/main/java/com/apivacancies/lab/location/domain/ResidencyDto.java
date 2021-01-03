@@ -6,8 +6,6 @@
 
 package com.apivacancies.lab.location.domain;
 
-import org.springframework.boot.autoconfigure.condition.ConditionOutcome;
-
 public class ResidencyDto {
 
     private String region;

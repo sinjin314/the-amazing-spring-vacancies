@@ -27,28 +27,19 @@ public class Residency {
 
     private Boolean nursery;
 
-    public enum LocationType implements Serializable {
-        MOUNTAIN,
-        OCEAN,
-        SEA,
-        CITY,
-        COUNTRY
-    }
-
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Apartment> apartments;
 
     @ManyToOne
     @JoinColumn(name = "country_id", foreignKey = @ForeignKey(name = "Country_id_Residency"))
     private Country country;
-
     @Enumerated(EnumType.STRING)
     private LocationType locType;
 
     public Long getId() {
         return id;
     }
-    
+
     public String getRegion() {
         return region;
     }
@@ -111,6 +102,14 @@ public class Residency {
 
     public void setNursery(Boolean nursery) {
         this.nursery = nursery;
+    }
+
+    public enum LocationType implements Serializable {
+        MOUNTAIN,
+        OCEAN,
+        SEA,
+        CITY,
+        COUNTRY
     }
 
 }
