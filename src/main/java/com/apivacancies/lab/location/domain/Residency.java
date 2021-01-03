@@ -14,7 +14,7 @@ import java.util.Set;
 public class Residency {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String region;
@@ -33,6 +33,7 @@ public class Residency {
     @ManyToOne
     @JoinColumn(name = "country_id", foreignKey = @ForeignKey(name = "Country_id_Residency"))
     private Country country;
+
     @Enumerated(EnumType.STRING)
     private LocationType locType;
 
@@ -111,5 +112,4 @@ public class Residency {
         CITY,
         COUNTRY
     }
-
 }

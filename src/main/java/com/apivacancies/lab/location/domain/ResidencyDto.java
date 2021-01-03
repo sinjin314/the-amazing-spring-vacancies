@@ -22,6 +22,16 @@ public class ResidencyDto {
 
     private Country country;
 
+    public ResidencyDto(String region, String address, Boolean spa, Boolean pool, Boolean nursery, Residency.LocationType locType, Country country) {
+        this.region = region;
+        this.address = address;
+        this.spa = spa;
+        this.pool = pool;
+        this.nursery = nursery;
+        this.locType = locType;
+        this.country = country;
+    }
+
     public String getRegion() {
         return region;
     }
