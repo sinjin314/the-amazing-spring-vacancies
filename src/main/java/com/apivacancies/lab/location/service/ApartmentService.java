@@ -50,14 +50,16 @@ public class ApartmentService {
         {
             throw new ApartmentNotFoundException(id);
         } else {
-            Apartment updatedApartment = apartmentRepository.findById(id).get();
+//            Apartment updatedApartment = apartmentRepository.findById(id).get();
+//
+//            updatedApartment.setClim(apartment.getClim());
+//            updatedApartment.setSurface(apartment.getSurface());
+//            updatedApartment.setPrice(apartment.getPrice());
+//            updatedApartment.setBabyEquipment(apartment.getBabyEquipment());
 
-            updatedApartment.setClim(apartment.getClim());
-            updatedApartment.setSurface(apartment.getSurface());
-            updatedApartment.setPrice(apartment.getPrice());
-            updatedApartment.setBabyEquipment(apartment.getBabyEquipment());
+            apartmentRepository.findApartmentById(id);
 
-            return apartmentRepository.save(updatedApartment);
+            return apartmentRepository.save(apartment);
         }
     }
 

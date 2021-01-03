@@ -42,11 +42,11 @@ public class ApartmentController {
           return apartmentService.getApartment(id);
      }
 
-     @PutMapping("/apartment/{id}")
-     @ResponseStatus(HttpStatus.CREATED)
-     public ResponseEntity<Apartment> updateApartment(@PathVariable Long id, @RequestBody Apartment apartment )
+     @PutMapping("/apartment")
+     @ResponseStatus(HttpStatus.OK)
+     public ResponseEntity<Apartment> updateApartment( @RequestBody Apartment apartment )
      {
-          return ResponseEntity.ok().body(apartmentService.updateApartment(id, apartment));
+          return ResponseEntity.ok().body(apartmentService.updateApartment(apartment.getId(), apartment));
      }
 
      @DeleteMapping("/apartment/{id}")
