@@ -10,12 +10,12 @@ import com.apivacancies.lab.location.domain.Apartment;
 import com.apivacancies.lab.location.service.ApartmentService;
 import com.apivacancies.lab.location.service.ResidencyService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @Controller
@@ -40,5 +40,30 @@ public class ApartmentController {
      public Apartment getApartment(@PathVariable Long id)
      {
           return apartmentService.getApartment(id);
+     }
+
+     @PutMapping("/apartment/{id}")
+     @ResponseStatus(HttpStatus.CREATED)
+     public ResponseEntity<Apartment> updateApartment(@PathVariable Long id, @RequestBody Apartment apartment )
+     {
+          return ResponseEntity.ok().body(apartmentService.updateApartment(id, apartment));
+     }
+
+     @DeleteMapping("/apartment/{id}")
+     @ResponseStatus(HttpStatus.OK)
+     public void deleteApartment(@PathVariable Long id) {
+          apartmentService.deleteApartment(id);
+     }
+
+     @PostMapping("/apartment/{residency_id}")
+     @ResponseStatus(HttpStatus.CREATED)
+     public ResponseEntity<Apartment> createApartments(@PathVariable Long residency_id, @RequestBody Apartment apartment) {
+          Apartment createdApartment = apartmentService.createApartment(residency_id, apartment);
+          URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                  .path("/residency_id")
+                  .buildAndExpand(createdApartment.getId())
+                  .toUri();
+
+          return ResponseEntity.created(uri).body(createdApartment);
      }
 }

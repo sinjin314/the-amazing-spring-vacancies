@@ -59,7 +59,6 @@ public class Residency {
         this.address = address;
     }
 
-
     public Country getCountry() {
         return country;
     }
@@ -106,6 +105,10 @@ public class Residency {
 
     public void setApartments(List<Apartment> apartments) {
         this.apartments = apartments;
+    }
+
+    public void addApartment(Apartment apartment) {
+        this.apartments.add(apartment);
     }
 
     public enum LocationType implements Serializable {
