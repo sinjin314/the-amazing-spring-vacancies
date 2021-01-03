@@ -22,9 +22,9 @@ import java.util.Optional;
 @Service
 public class ResidencyService {
 
-    private ResidencyRepository residencyRepository;
-    private CountryRepository countryRepository;
-    private ApartmentRepository apartmentRepository;
+    private final ResidencyRepository residencyRepository;
+    private final CountryRepository countryRepository;
+    private final ApartmentRepository apartmentRepository;
 
     public ResidencyService(ResidencyRepository residencyRepository, CountryRepository countryRepository, ApartmentRepository apartmentRepository) {
         this.residencyRepository = residencyRepository;
@@ -36,7 +36,7 @@ public class ResidencyService {
         return residencyRepository.findAll();
     }
 
-    public void generateResidencies(){
+    public void generateResidencies() {
         Country country = new Country();
         country.setName("France");
         countryRepository.save(country);
@@ -45,7 +45,7 @@ public class ResidencyService {
 
         apartment.setBabyEquipment(true);
         apartment.setBedding(4);
-        apartment.setPrice( (float)4000 );
+        apartment.setPrice((float) 4000);
         apartment.setSurface(6000);
         apartment.setClim(true);
 
@@ -71,7 +71,7 @@ public class ResidencyService {
 
         apartment.setBabyEquipment(true);
         apartment.setBedding(4);
-        apartment.setPrice( (float)4000 );
+        apartment.setPrice((float) 4000);
         apartment.setSurface(6000);
         apartment.setClim(true);
 
@@ -105,6 +105,9 @@ public class ResidencyService {
             newResidency.setPool(residency.getPool());
             newResidency.setRegion(residency.getRegion());
             newResidency.setSpa(residency.getSpa());
+            newResidency.setLatitude(residency.getLatitude());
+            newResidency.setLongitude(residency.getLongitude());
+
             return residencyRepository.save(newResidency);
         }
     }
@@ -121,14 +124,22 @@ public class ResidencyService {
             } else {
                 residencyRepository.findById(residency_id);
 
-                Residency residencyToBeUpdated = updatedResidency.get() ;
+                Residency residencyToBeUpdated = updatedResidency.get();
+
                 residencyToBeUpdated.setAddress(residency.getAddress());
+                residencyToBeUpdated.setRegion(residency.getRegion());
+
+                residencyToBeUpdated.setLongitude(residency.getLongitude());
+                residencyToBeUpdated.setLatitude(residency.getLatitude());
+
                 residencyToBeUpdated.setCountry(countryLinked.get());
                 residencyToBeUpdated.setLocType(residency.getLocType());
+
                 residencyToBeUpdated.setNursery(residency.getNursery());
                 residencyToBeUpdated.setPool(residency.getPool());
+
                 residencyToBeUpdated.setSpa(residency.getSpa());
-                residencyToBeUpdated.setRegion(residency.getRegion());
+
 
                 return residencyRepository.save(residencyToBeUpdated);
             }
@@ -148,5 +159,17 @@ public class ResidencyService {
     public List<Residency> findResidencyByCountry(String country_name) {
         Long country_id = countryRepository.findCountryByName(country_name);
         return residencyRepository.findResidencyByCountryId(country_id);
+    }
+
+    public List<Residency> findResidencyByRegion(String region) {
+        return residencyRepository.findResidencyByRegion(region);
+    }
+
+    public List<Residency> findResidencyWithPool() {
+        return residencyRepository.findResidencyWithPool();
+    }
+
+    public List<Residency> findResidencyAtMountain() {
+        return residencyRepository.findResidencyAtMountain();
     }
 }

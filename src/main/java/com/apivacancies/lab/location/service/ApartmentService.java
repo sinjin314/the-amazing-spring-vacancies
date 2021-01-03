@@ -14,18 +14,20 @@ import com.apivacancies.lab.location.repository.ApartmentRepository;
 import com.apivacancies.lab.location.repository.ResidencyRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ApartmentService {
-    private ApartmentRepository apartmentRepository;
-    private ResidencyRepository residencyRepository;
+    private final ApartmentRepository apartmentRepository;
+    private final ResidencyRepository residencyRepository;
+    private final ResidencyService residencyService;
 
-    public ApartmentService(ApartmentRepository apartmentRepository, ResidencyRepository residencyRepository)
-    {
+    public ApartmentService(ApartmentRepository apartmentRepository, ResidencyRepository residencyRepository, ResidencyService residencyService) {
         this.apartmentRepository = apartmentRepository;
         this.residencyRepository = residencyRepository;
+        this.residencyService = residencyService;
     }
 
     public List<Apartment> getApartments() {
@@ -35,8 +37,7 @@ public class ApartmentService {
     public Apartment getApartment(Long id) {
         Optional<Apartment> apartment = apartmentRepository.findById(id);
 
-        if( !apartment.isPresent() )
-        {
+        if (!apartment.isPresent()) {
             throw new ApartmentNotFoundException(id);
         } else {
             return apartment.get();
@@ -46,17 +47,9 @@ public class ApartmentService {
     public Apartment updateApartment(Long id, Apartment apartment) {
         Optional<Apartment> apartmentOptional = apartmentRepository.findById(id);
 
-        if (!apartmentOptional.isPresent())
-        {
+        if (!apartmentOptional.isPresent()) {
             throw new ApartmentNotFoundException(id);
         } else {
-//            Apartment updatedApartment = apartmentRepository.findById(id).get();
-//
-//            updatedApartment.setClim(apartment.getClim());
-//            updatedApartment.setSurface(apartment.getSurface());
-//            updatedApartment.setPrice(apartment.getPrice());
-//            updatedApartment.setBabyEquipment(apartment.getBabyEquipment());
-
             apartmentRepository.findApartmentById(id);
 
             return apartmentRepository.save(apartment);
@@ -66,8 +59,7 @@ public class ApartmentService {
     public void deleteApartment(Long id) {
         Optional<Apartment> apartmentOptional = apartmentRepository.findById(id);
 
-        if (!apartmentOptional.isPresent())
-        {
+        if (!apartmentOptional.isPresent()) {
             throw new ApartmentNotFoundException(id);
         } else {
             apartmentRepository.deleteById(id);
@@ -88,8 +80,39 @@ public class ApartmentService {
 
             return apartment;
         }
+    }
 
+    public List<Apartment> getApartmentByRegion(String region) {
+        List<Residency> residencies = residencyService.findResidencyByRegion(region);
+        List<Apartment> apartments = new ArrayList<>();
 
+        for (Residency residency : residencies) {
+            apartments.addAll(residency.getApartments());
+        }
+
+        return apartments;
+    }
+
+    public List<Apartment> getApartmentWithPool() {
+        List<Residency> residencies = residencyService.findResidencyWithPool();
+        List<Apartment> apartments = new ArrayList<>();
+
+        for (Residency residency : residencies) {
+            apartments.addAll(residency.getApartments());
+        }
+
+        return apartments;
+    }
+
+    public List<Apartment> getApartmentAtMountain() {
+        List<Residency> residencies = residencyService.findResidencyAtMountain();
+        List<Apartment> apartments = new ArrayList<>();
+
+        for (Residency residency : residencies) {
+            apartments.addAll(residency.getApartments());
+        }
+
+        return apartments;
     }
 
 }
