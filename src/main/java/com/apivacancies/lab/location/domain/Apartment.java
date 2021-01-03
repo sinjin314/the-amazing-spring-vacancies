@@ -18,44 +18,44 @@ public class Apartment {
 
     @Id
     @NotNull
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String type;
+    private Integer bedding;
 
-    private Long bedding;
-
-    private Long surface;
+    private Integer surface;
 
     private Boolean babyEquipment;
 
+    private Boolean clim;
+
     private Float price;
+
+    public Boolean getClim() {
+        return clim;
+    }
+
+    public void setClim(Boolean clim) {
+        this.clim = clim;
+    }
 
     public Long getId() {
         return id;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Long getBedding() {
+    public Integer getBedding() {
         return bedding;
     }
 
-    public void setBedding(Long bedding) {
+    public void setBedding(Integer bedding) {
         this.bedding = bedding;
     }
 
-    public Long getSurface() {
+    public Integer getSurface() {
         return surface;
     }
 
-    public void setSurface(Long surface) {
+    public void setSurface(Integer surface) {
         this.surface = surface;
     }
 

@@ -8,6 +8,8 @@ package com.apivacancies.lab.location.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -28,7 +30,7 @@ public class Residency {
     private Boolean nursery;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Apartment> apartments;
+    private List<Apartment> apartments = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "country_id", foreignKey = @ForeignKey(name = "Country_id_Residency"))
@@ -57,13 +59,6 @@ public class Residency {
         this.address = address;
     }
 
-    public Set<Apartment> getApartments() {
-        return apartments;
-    }
-
-    public void setApartments(Set<Apartment> apartments) {
-        this.apartments = apartments;
-    }
 
     public Country getCountry() {
         return country;
@@ -105,6 +100,14 @@ public class Residency {
         this.nursery = nursery;
     }
 
+    public List<Apartment> getApartments() {
+        return apartments;
+    }
+
+    public void setApartments(List<Apartment> apartments) {
+        this.apartments = apartments;
+    }
+
     public enum LocationType implements Serializable {
         MOUNTAIN,
         OCEAN,
@@ -112,4 +115,5 @@ public class Residency {
         CITY,
         COUNTRY
     }
+
 }
