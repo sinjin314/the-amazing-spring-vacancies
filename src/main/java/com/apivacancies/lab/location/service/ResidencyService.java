@@ -8,8 +8,10 @@ package com.apivacancies.lab.location.service;
 
 import com.apivacancies.lab.location.Error.Country.CountryNotFoundException;
 import com.apivacancies.lab.location.Error.Residency.ResidencyNotFoundException;
+import com.apivacancies.lab.location.domain.Apartment;
 import com.apivacancies.lab.location.domain.Country;
 import com.apivacancies.lab.location.domain.Residency;
+import com.apivacancies.lab.location.repository.ApartmentRepository;
 import com.apivacancies.lab.location.repository.CountryRepository;
 import com.apivacancies.lab.location.repository.ResidencyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +22,15 @@ import java.util.Optional;
 
 @Service
 public class ResidencyService {
-    @Autowired
+
     private ResidencyRepository residencyRepository;
     private CountryRepository countryRepository;
+    private ApartmentRepository apartmentRepository;
 
-    public ResidencyService(ResidencyRepository residencyRepository, CountryRepository countryRepository) {
+    public ResidencyService(ResidencyRepository residencyRepository, CountryRepository countryRepository, ApartmentRepository apartmentRepository) {
         this.residencyRepository = residencyRepository;
         this.countryRepository = countryRepository;
+        this.apartmentRepository = apartmentRepository;
     }
 
     public List<Residency> getResidencies() {
@@ -38,6 +42,16 @@ public class ResidencyService {
         country.setName("France");
         countryRepository.save(country);
 
+        Apartment apartment = new Apartment();
+
+        apartment.setBabyEquipment(true);
+        apartment.setBedding(4);
+        apartment.setPrice( (float)4000 );
+        apartment.setSurface(6000);
+        apartment.setClim(true);
+
+        apartmentRepository.save(apartment);
+
         Residency residency = new Residency();
         residency.setAddress("dubai");
         residency.setCountry(country);
@@ -45,11 +59,24 @@ public class ResidencyService {
         residency.setNursery(true);
         residency.setPool(false);
         residency.setRegion("Occitanie");
+
+        residency.getApartments().add(apartment);
+
         residencyRepository.save(residency);
 
         country = new Country();
         country.setName("Canada");
         countryRepository.save(country);
+
+        apartment = new Apartment();
+
+        apartment.setBabyEquipment(true);
+        apartment.setBedding(4);
+        apartment.setPrice( (float)4000 );
+        apartment.setSurface(6000);
+        apartment.setClim(true);
+
+        apartmentRepository.save(apartment);
 
         residency = new Residency();
         residency.setAddress("vancouver");
@@ -58,7 +85,11 @@ public class ResidencyService {
         residency.setNursery(true);
         residency.setPool(false);
         residency.setRegion("Champs De Mais");
+
+        residency.getApartments().add(apartment);
+
         residencyRepository.save(residency);
+
     }
 
     public Residency createResidency(Long id, Residency residency) {
@@ -114,4 +145,5 @@ public class ResidencyService {
             residencyRepository.deleteById(id);
         }
     }
+
 }
