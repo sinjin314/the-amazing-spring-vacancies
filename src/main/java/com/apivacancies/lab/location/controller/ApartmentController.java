@@ -35,5 +35,10 @@ public class ApartmentController {
           return apartmentService.getApartments();
      }
 
-
+     @GetMapping("/apartment/{id}")
+     @ResponseStatus(HttpStatus.OK)
+     public Apartment getApartment(@PathVariable Long id)
+     {
+          return apartmentService.getApartment(id);
+     }
 }
