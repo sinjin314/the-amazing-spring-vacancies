@@ -8,6 +8,8 @@ package com.apivacancies.lab.location.repository;
 
 import com.apivacancies.lab.location.domain.Residency;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ResidencyRepository extends JpaRepository<Residency, Long> {
 }

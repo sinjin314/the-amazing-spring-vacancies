@@ -14,7 +14,7 @@ import java.util.Set;
 public class Residency {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String region;
@@ -26,14 +26,6 @@ public class Residency {
     private Boolean pool;
 
     private Boolean nursery;
-
-    public enum LocationType implements Serializable {
-        MOUNTAIN,
-        OCEAN,
-        SEA,
-        CITY,
-        COUNTRY
-    }
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Apartment> apartments;
@@ -48,7 +40,7 @@ public class Residency {
     public Long getId() {
         return id;
     }
-    
+
     public String getRegion() {
         return region;
     }
@@ -113,4 +105,11 @@ public class Residency {
         this.nursery = nursery;
     }
 
+    public enum LocationType implements Serializable {
+        MOUNTAIN,
+        OCEAN,
+        SEA,
+        CITY,
+        COUNTRY
+    }
 }
