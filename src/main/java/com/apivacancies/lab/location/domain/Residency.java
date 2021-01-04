@@ -6,11 +6,12 @@
 
 package com.apivacancies.lab.location.domain;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class Residency {
@@ -23,7 +24,9 @@ public class Residency {
 
     private String address;
 
+
     private Boolean spa;
+
 
     private Boolean pool;
 
@@ -34,10 +37,33 @@ public class Residency {
 
     @ManyToOne
     @JoinColumn(name = "country_id", foreignKey = @ForeignKey(name = "Country_id_Residency"))
+    @NotNull
     private Country country;
 
     @Enumerated(EnumType.STRING)
     private LocationType locType;
+
+
+    private Long latitude;
+
+
+    private Long Longitude;
+
+    public Long getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Long latitude) {
+        this.latitude = latitude;
+    }
+
+    public Long getLongitude() {
+        return Longitude;
+    }
+
+    public void setLongitude(Long longitude) {
+        Longitude = longitude;
+    }
 
     public Long getId() {
         return id;

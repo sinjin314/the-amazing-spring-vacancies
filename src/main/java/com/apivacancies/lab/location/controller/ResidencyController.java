@@ -71,5 +71,5 @@ public class ResidencyController {
         return residencyService.findResidencyByCountry(country);
     }
 
-
 }
+    
