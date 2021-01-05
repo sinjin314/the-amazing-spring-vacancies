@@ -16,7 +16,7 @@ import java.util.List;
 @Repository
 public interface ResidencyRepository extends JpaRepository<Residency, Long> {
 
-    @Query(value = "select r FROM Residency r where r.country = :id")
+    @Query(value = "select * FROM residency where country_id = :id", nativeQuery = true)
     List<Residency> findResidencyByCountryId(Long id);
 
     @Query(value = "SELECT r FROM Residency r WHERE r.region = :region")

@@ -65,10 +65,16 @@ public class ResidencyController {
         residencyService.deleteResidency(id);
     }
 
-    @GetMapping("/residency/{country}")
+    @GetMapping("/residency/country/{country}")
     @ResponseStatus(HttpStatus.OK)
     public List<Residency> getResidencyByCountry(@PathVariable String country) {
         return residencyService.findResidencyByCountry(country);
+    }
+
+    @GetMapping("/residency/country-id")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Residency> findResidencyByCountryId(Long id) {
+        return residencyService.findResidencyByCountryId(id);
     }
 
 }

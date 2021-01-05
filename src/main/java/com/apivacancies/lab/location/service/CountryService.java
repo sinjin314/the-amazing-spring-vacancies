@@ -87,4 +87,8 @@ public class CountryService {
             countryRepository.deleteById(id);
         }
     }
+
+    public Country findCountryByName(String name) {
+        return countryRepository.findCountryByName(name).get(0);
+    }
 }
