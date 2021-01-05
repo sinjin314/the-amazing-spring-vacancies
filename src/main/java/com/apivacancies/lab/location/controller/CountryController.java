@@ -75,4 +75,10 @@ public class CountryController {
     public void deleteCountry(@PathVariable Long id) {
         countryService.deleteCountry(id);
     }
+
+    @GetMapping("/country/name")
+    @ResponseStatus(HttpStatus.OK)
+    public Country findCountryByName(String name) {
+        return countryService.findCountryByName(name);
+    }
 }

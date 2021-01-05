@@ -157,8 +157,12 @@ public class ResidencyService {
     }
 
     public List<Residency> findResidencyByCountry(String country_name) {
-        Long country_id = countryRepository.findCountryByName(country_name);
-        return residencyRepository.findResidencyByCountryId(country_id);
+        Country country = countryRepository.findCountryByName(country_name).get(0);
+        return residencyRepository.findResidencyByCountryId(country.getId());
+    }
+
+    public List<Residency> findResidencyByCountryId(Long id) {
+        return residencyRepository.findResidencyByCountryId(id);
     }
 
     public List<Residency> findResidencyByRegion(String region) {
