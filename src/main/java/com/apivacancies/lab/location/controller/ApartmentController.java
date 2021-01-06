@@ -31,16 +31,16 @@ public class ApartmentController {
         this.apartmentService = apartmentService;
     }
 
-    @GetMapping("/apartment")
+    @GetMapping("/apartments")
     @ResponseStatus(HttpStatus.OK)
     public List<Apartment> getApartments() {
         return apartmentService.getApartments();
     }
 
-    @GetMapping("/apartment/{id}")
+    @GetMapping("/apartment")
     @ResponseStatus(HttpStatus.OK)
-    public Apartment getApartment(@PathVariable Long id) {
-        return apartmentService.getApartment(id);
+    public Apartment getApartment(Long appartId) {
+        return apartmentService.getApartment(appartId);
     }
 
     @PutMapping("/apartment")
@@ -49,15 +49,15 @@ public class ApartmentController {
         return ResponseEntity.ok().body(apartmentService.updateApartment(apartment.getId(), apartment));
     }
 
-    @DeleteMapping("/apartment/{id}")
+    @DeleteMapping("/apartment")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteApartment(@PathVariable Long id) {
-        apartmentService.deleteApartment(id);
+    public void deleteApartment(Long appartId) {
+        apartmentService.deleteApartment(appartId);
     }
 
-    @PostMapping("/apartment/{residency_id}")
+    @PostMapping("/apartment")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Apartment> createApartments(@PathVariable Long residency_id, @RequestBody Apartment apartment) {
+    public ResponseEntity<Apartment> createApartments(Long residency_id, @RequestBody Apartment apartment) {
         Apartment createdApartment = apartmentService.createApartment(residency_id, apartment);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/residency_id")
@@ -81,19 +81,18 @@ public class ApartmentController {
 
     @GetMapping("/apartment/mountainView")
     @ResponseStatus(HttpStatus.OK)
-    public List<Apartment> getApartmentAtMountain() {
+    public List<Apartment> findApartmentWithMountain() {
         return apartmentService.getApartmentAtMountain();
     }
 
     @GetMapping("/apartment/available")
     @ResponseStatus(HttpStatus.OK)
     public List<Apartment> findAvailableApartment(@RequestParam(value = "checkIn")
-                                                  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-                                                          LocalDate checkIn,
+                                                        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                                        LocalDate checkIn,
                                                   @RequestParam(value = "checkOut")
-                                                  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                                        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
                                                           LocalDate checkOut) {
-
         return apartmentService.findAvailableApartBetweenDate(checkIn, checkOut);
     }
 }

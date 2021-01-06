@@ -50,4 +50,10 @@ public class BookingController {
     public List<Booking> findBookingByApartInCheckingOrder(Long appart_id) {
         return bookingService.findBookingsByAppartInCheckInOrder(appart_id);
     }
+
+    @GetMapping("/bookings")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Booking> getAllBooking() {
+        return bookingService.getBookings();
+    }
 }
