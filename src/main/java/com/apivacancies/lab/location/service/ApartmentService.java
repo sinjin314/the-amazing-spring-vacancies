@@ -159,7 +159,6 @@ public class ApartmentService {
         Booking currentBook = new Booking();
         Booking nextBook = new Booking();
 
-
         for (int i = 1; i < bookings.size(); i++) {
             currentBook = bookings.get(i - 1);
             nextBook = bookings.get(i);

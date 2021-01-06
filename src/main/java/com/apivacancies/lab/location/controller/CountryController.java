@@ -29,7 +29,7 @@ public class CountryController {
         this.countryService = countryService;
     }
 
-    @GetMapping("/country")
+    @GetMapping("/countrys")
     @ResponseStatus(HttpStatus.OK)
     public List<Country> getCountrys() {
         return countryService.getCountrys();
@@ -41,9 +41,9 @@ public class CountryController {
         countryService.generateCountrys();
     }
 
-    @GetMapping("/country/{id}")
+    @GetMapping("/country")
     @ResponseStatus(HttpStatus.OK)
-    public Optional<Country> getCountry(@PathVariable Long id) {
+    public Optional<Country> getCountry( Long id) {
         Optional<Country> country = countryService.getCountry(id);
         if (!country.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Country doesn't exist in database");
@@ -70,9 +70,9 @@ public class CountryController {
         return ResponseEntity.ok().body(countryService.updateCountry(country.getId(), country));
     }
 
-    @DeleteMapping("/country/{id}")
+    @DeleteMapping("/country")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteCountry(@PathVariable Long id) {
+    public void deleteCountry( Long id) {
         countryService.deleteCountry(id);
     }
 
@@ -81,4 +81,5 @@ public class CountryController {
     public Country findCountryByName(String name) {
         return countryService.findCountryByName(name);
     }
+
 }

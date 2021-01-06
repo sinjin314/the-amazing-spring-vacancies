@@ -42,8 +42,8 @@ public class ResidencyController {
 
     @PostMapping("/residency/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Residency> createResidency(@PathVariable Long id, @RequestBody Residency residency) {
-        Residency createdResidency = residencyService.createResidency(id, residency);
+    public ResponseEntity<Residency> createResidency(Long country_id, @RequestBody Residency residency) {
+        Residency createdResidency = residencyService.createResidency(country_id, residency);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
