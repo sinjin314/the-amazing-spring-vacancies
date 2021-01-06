@@ -9,6 +9,7 @@ package com.apivacancies.lab.location.controller;
 import com.apivacancies.lab.location.domain.Apartment;
 import com.apivacancies.lab.location.service.ApartmentService;
 import com.apivacancies.lab.location.service.ResidencyService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -81,5 +83,17 @@ public class ApartmentController {
     @ResponseStatus(HttpStatus.OK)
     public List<Apartment> getApartmentAtMountain() {
         return apartmentService.getApartmentAtMountain();
+    }
+
+    @GetMapping("/apartment/available")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Apartment> findAvailableApartment(@RequestParam(value = "checkIn")
+                                                  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                                          LocalDate checkIn,
+                                                  @RequestParam(value = "checkOut")
+                                                  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                                          LocalDate checkOut) {
+
+        return apartmentService.findAvailableApartBetweenDate(checkIn, checkOut);
     }
 }

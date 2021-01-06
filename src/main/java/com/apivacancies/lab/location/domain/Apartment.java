@@ -8,10 +8,8 @@ package com.apivacancies.lab.location.domain;
 
 import com.sun.istack.NotNull;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Apartment {
@@ -30,6 +28,9 @@ public class Apartment {
     private Boolean clim;
 
     private Float price;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Booking> bookings;
 
     public Boolean getClim() {
         return clim;
@@ -75,11 +76,18 @@ public class Apartment {
         this.price = price;
     }
 
-//    public Long getResidency_id() {
-//        return residency_id;
-//    }
-//
-//    public void setResidency_id(Long residency_id) {
-//        this.residency_id = residency_id;
-//    }
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
+    }
+
+
+    public void addBooking(Booking booking) {
+        this.bookings.add(booking);
+    }
+
+
 }

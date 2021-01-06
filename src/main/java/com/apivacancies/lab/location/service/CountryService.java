@@ -9,7 +9,6 @@ package com.apivacancies.lab.location.service;
 import com.apivacancies.lab.location.Error.Country.CountryNotFoundException;
 import com.apivacancies.lab.location.domain.Country;
 import com.apivacancies.lab.location.repository.CountryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
