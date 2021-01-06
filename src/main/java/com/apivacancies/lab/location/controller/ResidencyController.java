@@ -9,7 +9,6 @@ package com.apivacancies.lab.location.controller;
 import com.apivacancies.lab.location.domain.Residency;
 import com.apivacancies.lab.location.service.CountryService;
 import com.apivacancies.lab.location.service.ResidencyService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -56,8 +55,8 @@ public class ResidencyController {
 
     @PutMapping("/residency/{residency_id}/{country_id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Residency> updateResidency(@PathVariable Long country_id, @PathVariable Long residency_id ,@RequestBody Residency residency) {
-        return ResponseEntity.ok().body(residencyService.updateResidency(country_id, residency_id , residency));
+    public ResponseEntity<Residency> updateResidency(@PathVariable Long country_id, @PathVariable Long residency_id, @RequestBody Residency residency) {
+        return ResponseEntity.ok().body(residencyService.updateResidency(country_id, residency_id, residency));
     }
 
     @DeleteMapping("/residency/{id}")
@@ -65,4 +64,18 @@ public class ResidencyController {
     public void deleteResidency(@PathVariable Long id) {
         residencyService.deleteResidency(id);
     }
+
+    @GetMapping("/residency/country/{country}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Residency> getResidencyByCountry(@PathVariable String country) {
+        return residencyService.findResidencyByCountry(country);
+    }
+
+    @GetMapping("/residency/country-id")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Residency> findResidencyByCountryId(Long id) {
+        return residencyService.findResidencyByCountryId(id);
+    }
+
 }
+    

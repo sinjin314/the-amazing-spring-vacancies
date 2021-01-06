@@ -14,7 +14,6 @@ import com.apivacancies.lab.location.domain.Residency;
 import com.apivacancies.lab.location.repository.ApartmentRepository;
 import com.apivacancies.lab.location.repository.CountryRepository;
 import com.apivacancies.lab.location.repository.ResidencyRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,9 +22,9 @@ import java.util.Optional;
 @Service
 public class ResidencyService {
 
-    private ResidencyRepository residencyRepository;
-    private CountryRepository countryRepository;
-    private ApartmentRepository apartmentRepository;
+    private final ResidencyRepository residencyRepository;
+    private final CountryRepository countryRepository;
+    private final ApartmentRepository apartmentRepository;
 
     public ResidencyService(ResidencyRepository residencyRepository, CountryRepository countryRepository, ApartmentRepository apartmentRepository) {
         this.residencyRepository = residencyRepository;
@@ -37,7 +36,7 @@ public class ResidencyService {
         return residencyRepository.findAll();
     }
 
-    public void generateResidencies(){
+    public void generateResidencies() {
         Country country = new Country();
         country.setName("France");
         countryRepository.save(country);
@@ -46,7 +45,7 @@ public class ResidencyService {
 
         apartment.setBabyEquipment(true);
         apartment.setBedding(4);
-        apartment.setPrice( (float)4000 );
+        apartment.setPrice((float) 4000);
         apartment.setSurface(6000);
         apartment.setClim(true);
 
@@ -72,7 +71,7 @@ public class ResidencyService {
 
         apartment.setBabyEquipment(true);
         apartment.setBedding(4);
-        apartment.setPrice( (float)4000 );
+        apartment.setPrice((float) 4000);
         apartment.setSurface(6000);
         apartment.setClim(true);
 
@@ -106,6 +105,9 @@ public class ResidencyService {
             newResidency.setPool(residency.getPool());
             newResidency.setRegion(residency.getRegion());
             newResidency.setSpa(residency.getSpa());
+            newResidency.setLatitude(residency.getLatitude());
+            newResidency.setLongitude(residency.getLongitude());
+
             return residencyRepository.save(newResidency);
         }
     }
@@ -122,14 +124,22 @@ public class ResidencyService {
             } else {
                 residencyRepository.findById(residency_id);
 
-                Residency residencyToBeUpdated = updatedResidency.get() ;
+                Residency residencyToBeUpdated = updatedResidency.get();
+
                 residencyToBeUpdated.setAddress(residency.getAddress());
+                residencyToBeUpdated.setRegion(residency.getRegion());
+
+                residencyToBeUpdated.setLongitude(residency.getLongitude());
+                residencyToBeUpdated.setLatitude(residency.getLatitude());
+
                 residencyToBeUpdated.setCountry(countryLinked.get());
                 residencyToBeUpdated.setLocType(residency.getLocType());
+
                 residencyToBeUpdated.setNursery(residency.getNursery());
                 residencyToBeUpdated.setPool(residency.getPool());
+
                 residencyToBeUpdated.setSpa(residency.getSpa());
-                residencyToBeUpdated.setRegion(residency.getRegion());
+
 
                 return residencyRepository.save(residencyToBeUpdated);
             }
@@ -146,4 +156,24 @@ public class ResidencyService {
         }
     }
 
+    public List<Residency> findResidencyByCountry(String country_name) {
+        Country country = countryRepository.findCountryByName(country_name);
+        return residencyRepository.findResidencyByCountryId(country.getId());
+    }
+
+    public List<Residency> findResidencyByCountryId(Long id) {
+        return residencyRepository.findResidencyByCountryId(id);
+    }
+
+    public List<Residency> findResidencyByRegion(String region) {
+        return residencyRepository.findResidencyByRegion(region);
+    }
+
+    public List<Residency> findResidencyWithPool() {
+        return residencyRepository.findResidencyWithPool();
+    }
+
+    public List<Residency> findResidencyAtMountain() {
+        return residencyRepository.findResidencyAtMountain();
+    }
 }

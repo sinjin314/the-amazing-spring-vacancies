@@ -17,8 +17,8 @@ import java.util.Optional;
 
 @Service
 public class CountryService {
-    @Autowired
-    private CountryRepository countryRepository;
+
+    private final CountryRepository countryRepository;
 
     public CountryService(CountryRepository countryRepository) {
         this.countryRepository = countryRepository;
@@ -86,5 +86,9 @@ public class CountryService {
         } else {
             countryRepository.deleteById(id);
         }
+    }
+
+    public Country findCountryByName(String name) {
+        return countryRepository.findCountryByName(name);
     }
 }
